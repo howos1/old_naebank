@@ -48,30 +48,28 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #ff4757; /* Красная кнопка */
             border: none;
             border-radius: 5px;
             color: white;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #ff6b81; /* Светлее при наведении */
+        .login-button {
+            background-color: #4CAF50; /* Зеленая кнопка для входа */
+        }
+
+        .login-button:hover {
+            background-color: #45a049; /* Светлее при наведении */
         }
 
         .translate-button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50; /* Зеленая кнопка */
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
+            background-color: #d4c200; /* Темно-желтая кнопка для перевода */
             margin-top: 15px;
+            display: none; /* Скрываем кнопку по умолчанию */
         }
 
         .translate-button:hover {
-            background-color: #45a049; /* Светлее при наведении */
+            background-color: #b3a600; /* Темнее при наведении */
         }
 
         .form-container {
@@ -103,7 +101,7 @@
             <form id="loginForm">
                 <input type="text" id="username" placeholder="Логин" required>
                 <input type="password" id="password" placeholder="Пароль" required>
-                <button type="submit">Войти</button>
+                <button type="submit" class="login-button">Войти</button>
                 <button type="button" class="translate-button" onclick="showIframe()">Перевести</button>
             </form>
         </div>
@@ -128,18 +126,38 @@
                 document.getElementById('message').textContent = 'Баланс: 0'; // Отображаем баланс 0
                 document.getElementById('message').style.display = 'block'; // Показываем сообщение
                 document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
-            } else if (username === 'Alihansao2' && password === '1909') {
+                document.querySelector('.translate-button').style.display = 'block'; // Показываем кнопку "Перевести"
+                document.querySelector('.login-button').style.display = 'none'; // Скрываем кнопку "Войти"
+                
+                return;
+
+             } else if (username === 'Alihansao2' && password === '1909') {
                 document.getElementById('message').textContent = 'Баланс: 0'; // Отображаем баланс 1
                 document.getElementById('message').style.display = 'block'; // Показываем сообщение
                 document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
-            } else if (username === 'nevel' && password === '532') {
+                document.querySelector('.translate-button').style.display = 'block'; // Показываем кнопку "Перевести"
+                document.querySelector('.login-button').style.display = 'none'; // Скрываем кнопку "Войти"
+                
+                return;
+
+             } else if (username === 'nevel' && password === '532') {
                 document.getElementById('message').textContent = 'Баланс: 0'; // Отображаем баланс 2
                 document.getElementById('message').style.display = 'block'; // Показываем сообщение
                 document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
-             } else if (username === 'HoWoSy' && password === 'ladidonGandon001') {
+                document.querySelector('.translate-button').style.display = 'block'; // Показываем кнопку "Перевести"
+                document.querySelector('.login-button').style.display = 'none'; // Скрываем кнопку "Войти"
+                
+                return;
+
+             } else if (username === 'howosy' && password === 'ladidonGandon001') {
                 document.getElementById('message').textContent = 'Баланс: 1159'; // Отображаем баланс
                 document.getElementById('message').style.display = 'block'; // Показываем сообщение
                 document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
+                document.querySelector('.translate-button').style.display = 'block'; // Показываем кнопку "Перевести"
+                document.querySelector('.login-button').style.display = 'none'; // Скрываем кнопку "Войти"
+                
+                return;
+
              } else {
                 // Показать сообщение об ошибке
                 document.getElementById('errorMessage').textContent = 'Неверный логин или пароль';
