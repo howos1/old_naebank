@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>НаеБанк - Авторизация</title>
+    <style>
+        body {
+            background-color: #2c2c54; /* Темный фон */
+            color: #ffffff; /* Белый текст */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #1a1a2e; /* Темный контейнер */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            background-color: #333; /* Темный фон для полей */
+            color: #fff; /* Белый текст в полях */
+            font-size: 14px; /* Размер шрифта */
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none; /* Убираем обводку при фокусе */
+            background-color: #444; /* Светлее при фокусе */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff4757; /* Красная кнопка */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff6b81; /* Светлее при наведении */
+        }
+
+        .message {
+            margin-top: 20px;
+            display: none; /* Скрыто по умолчанию */
+            font-size: 16px; /* Размер шрифта для сообщения */
+            color: #ffdd57; /* Цвет текста баланса */
+        }
+
+        .error-message {
+            margin-top: 10px;
+            font-size: 14px; /* Размер шрифта для сообщения об ошибке */
+            color: #ff4757; /* Цвет текста ошибки */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>НаеБанк</h1>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Логин" required>
+            <input type="password" id="password" placeholder="Пароль" required>
+            <button type="submit">Войти</button>
+        </form>
+        <div class="message" id="message"></div>
+        <div class="error-message" id="errorMessage"></div> <!-- Поле для сообщения об ошибке -->
+    </div>
+
+    <script>
+        document.getElementById('loginForm').onsubmit = function(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Скрываем сообщение об ошибке при новой попытке входа
+            document.getElementById('errorMessage').style.display = 'none';
+
+            if (username === 'ladidon' && password === 'test123') {
+                document.getElementById('message').textContent = 'Баланс: 0'; // Отображаем баланс 0
+                document.getElementById('message').style.display = 'block'; // Показываем сообщение
+                document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
+            } else if (username === 'Alihansao2' && password === '1909') {
+                document.getElementById('message').textContent = 'Баланс: 1'; // Отображаем баланс 1
+                document.getElementById('message').style.display = 'block'; // Показываем сообщение
+                document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
+            } else if (username === 'nevel' && password === 'test121') {
+                document.getElementById('message').textContent = 'Баланс: 2'; // Отображаем баланс 2
+                document.getElementById('message').style.display = 'block'; // Показываем сообщение
+                document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
+            } else {
+                // Показать сообщение об ошибке
+                document.getElementById('errorMessage').textContent = 'Неверный логин или пароль';
+                document.getElementById('errorMessage').style.display = 'block'; // Показываем сообщение об ошибке
+                document.getElementById('message').style.display = 'none'; // Скрываем успешное сообщение
+            }
+        };
+    </script>
+</body>
+</html>
