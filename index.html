@@ -62,18 +62,31 @@
             background-color: #45a049; /* Светлее при наведении */
         }
 
+        .tapalka-soon-button {
+            background-color: #800080; /* Фиолетовая кнопка "Тапалка (скоро)" */
+            margin-top: 10px; /* Отступ сверху для кнопки "Тапалка (скоро)" */
+        }
+
+        .tapalka-soon-button:hover {
+            background-color: #6a006a; /* Темнее при наведении на кнопку "Тапалка (скоро)" */
+        }
+
         .translate-button {
             background-color: #d4c200; /* Темно-желтая кнопка для перевода */
             margin-top: 15px;
-            display: none; /* Скрываем кнопку по умолчанию */
         }
 
         .translate-button:hover {
             background-color: #b3a600; /* Темнее при наведении */
         }
 
-        .form-container {
-            display: block; /* Показываем форму по умолчанию */
+        .logout-button {
+            background-color: #ff4757; /* Красная кнопка для выхода */
+            margin-top: 10px; /* Добавлен пробел между кнопками */
+        }
+
+        .logout-button:hover {
+            background-color: #e84118; /* Темнее при наведении */
         }
 
         .iframe-container {
@@ -92,84 +105,128 @@
             font-size: 14px; /* Размер шрифта для сообщения об ошибке */
             color: #ff4757; /* Цвет текста ошибки */
         }
+
+        .current-login {
+            margin-top: 10px;
+            font-size: 16px; /* Размер шрифта для текущего логина */
+            color: #ffdd57; /* Цвет текста текущего логина */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>НаеБанк</h1>
-        <div class="form-container">
+        
+        <div class="form-container" id="formContainer">
             <form id="loginForm">
                 <input type="text" id="username" placeholder="Логин" required>
                 <input type="password" id="password" placeholder="Пароль" required>
                 <button type="submit" class="login-button">Войти</button>
-                <button type="button" class="translate-button" onclick="showIframe()">Перевести</button>
-            </form>
-        </div>
-        <div class="iframe-container" id="iframeContainer">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdrax9jYifnv1D8X5t0M4eleigWt69AlKSmYJJMN5-UM9JeHQ/viewform?embedded=true" width="325" height="400" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
-        </div>
-        <div class="message" id="message"></div>
-        <div class="error-message" id="errorMessage"></div> <!-- Поле для сообщения об ошибке -->
-    </div>
+                <!-- Кнопка "Тапалка (скоро)", которая пока ничего не делает -->
+                <button type="button" class="tapalka-soon-button">Тапалка (скоро)</button> 
+                <!-- Убрали кнопку "Перевести" с экрана входа -->
+                </form>
+         </div>
 
-    <script>
-        document.getElementById('loginForm').onsubmit = function(event) {
-            event.preventDefault(); // Предотвращаем отправку формы
+         <!-- Поле для отображения информации о пользователе -->
+         <div id="userInfo" style="display:none;">
+             <div class="current-login" id="currentLogin"></div> <!-- Поле для текущего логина -->
+             <div class="message" id="message"></div> <!-- Сообщение о балансе -->
+             <button class="translate-button" onclick="showIframe()">Перевести</button> <!-- Кнопка "Перевести" -->
+             <button class="logout-button" onclick="logout()">Выход</button> <!-- Кнопка "Выход" -->
+         </div>
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+         <div class="iframe-container" id="iframeContainer">
+             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdrax9jYifnv1D8X5t0M4eleigWt69AlKSmYJJMN5-UM9JeHQ/viewform?embedded=true" width="325" height="400" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+         </div>
 
-            // Скрываем сообщение об ошибке при новой попытке входа
-            document.getElementById('errorMessage').style.display = 'none';
+         <div class="error-message" id="errorMessage"></div> <!-- Поле для сообщения об ошибке -->
+     </div>
 
-            if (username === 'ladidon' && password === '23975Bq12') {
-                document.getElementById('message').textContent = 'Баланс: 0'; // Отображаем баланс 0
-                document.getElementById('message').style.display = 'block'; // Показываем сообщение
-                document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
-                document.querySelector('.translate-button').style.display = 'block'; // Показываем кнопку "Перевести"
-                document.querySelector('.login-button').style.display = 'none'; // Скрываем кнопку "Войти"
-                
-                return;
+     <script>
+         // Проверяем, есть ли сохраненные данные входа в localStorage
+         const savedUsername = localStorage.getItem('username');
+         const savedPassword = localStorage.getItem('password');
+
+         if (savedUsername && savedPassword) {
+             // Если данные есть, автоматически входим и показываем баланс
+             handleLogin(savedUsername, savedPassword);
+         } else {
+             // Если данных нет, показываем форму входа
+             document.getElementById('formContainer').style.display = 'block';
+         }
+
+         document.getElementById('loginForm').onsubmit = function(event) {
+             event.preventDefault();
+
+             const username = document.getElementById('username').value;
+             const password = document.getElementById('password').value;
+
+             // Сохраняем данные входа в localStorage
+             localStorage.setItem('username', username);
+             localStorage.setItem('password', password);
+
+             handleLogin(username, password);
+         };
+
+         function handleLogin(username, password) {
+             // Скрываем сообщение об ошибке при новой попытке входа
+             document.getElementById('errorMessage').style.display = 'none';
+
+             if (username === 'ladidon' && password === '23975Bq12') {
+                 showBalance('Баланс: 0', username);
+                 return;
 
              } else if (username === 'Alihansao2' && password === '1909') {
-                document.getElementById('message').textContent = 'Баланс: 0'; // Отображаем баланс 1
-                document.getElementById('message').style.display = 'block'; // Показываем сообщение
-                document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
-                document.querySelector('.translate-button').style.display = 'block'; // Показываем кнопку "Перевести"
-                document.querySelector('.login-button').style.display = 'none'; // Скрываем кнопку "Войти"
-                
-                return;
+                 showBalance('Баланс: 0', username);
+                 return;
 
              } else if (username === 'nevel' && password === '532') {
-                document.getElementById('message').textContent = 'Баланс: 0'; // Отображаем баланс 2
-                document.getElementById('message').style.display = 'block'; // Показываем сообщение
-                document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
-                document.querySelector('.translate-button').style.display = 'block'; // Показываем кнопку "Перевести"
-                document.querySelector('.login-button').style.display = 'none'; // Скрываем кнопку "Войти"
-                
-                return;
+                 showBalance('Баланс: 0', username);
+                 return;
 
              } else if (username === 'howosy' && password === 'ladidonGandon001') {
-                document.getElementById('message').textContent = 'Баланс: 1159'; // Отображаем баланс
-                document.getElementById('message').style.display = 'block'; // Показываем сообщение
-                document.getElementById('errorMessage').style.display = 'none'; // Скрываем сообщение об ошибке
-                document.querySelector('.translate-button').style.display = 'block'; // Показываем кнопку "Перевести"
-                document.querySelector('.login-button').style.display = 'none'; // Скрываем кнопку "Войти"
-                
-                return;
+                 showBalance('Баланс: 1159', username);
+                 return;
 
              } else {
-                // Показать сообщение об ошибке
-                document.getElementById('errorMessage').textContent = 'Неверный логин или пароль';
-                document.getElementById('errorMessage').style.display = 'block'; // Показываем сообщение об ошибке
-                document.getElementById('message').style.display = 'none'; // Скрываем успешное сообщение
+                 // Показать сообщение об ошибке
+                 document.getElementById('errorMessage').textContent = 'Неверный логин или пароль';
+                 document.getElementById('errorMessage').style.display = 'block'; // Показываем сообщение об ошибке
+                 document.getElementById('message').style.display = 'none'; // Скрываем успешное сообщение
              }
-         };
+         }
+
+         function showBalance(balanceMessage, username) {
+             // Скрываем форму входа и показываем информацию о пользователе
+             document.getElementById('formContainer').style.display = 'none';
+             document.getElementById('userInfo').style.display = 'block'; // Показываем информацию о пользователе
+
+             document.getElementById('message').textContent = balanceMessage; // Отображаем баланс
+             document.getElementById('message').style.display = 'block'; // Показываем сообщение
+
+             // Показываем текущий логин
+             document.getElementById('currentLogin').textContent = `Текущий логин: ${username}`;
+             document.getElementById('currentLogin').style.display = 'block';
+         }
 
          function showIframe() {
              document.getElementById('iframeContainer').style.display = 'block';
-             document.querySelector('.form-container').style.display = 'none';
          }
-    </script>
+
+         function logout() {
+             // Удаляем данные из localStorage
+             localStorage.removeItem('username');
+             localStorage.removeItem('password');
+
+             // Скрываем информацию о пользователе и показываем форму входа
+             document.getElementById('userInfo').style.display = 'none';
+             document.getElementById('formContainer').style.display = 'block';
+
+             // Очищаем поля ввода
+             document.getElementById('username').value = '';
+             document.getElementById('password').value = '';
+         }
+     </script>
 </body>
 </html>
