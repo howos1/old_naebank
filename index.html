@@ -100,6 +100,13 @@
             color: #ffdd57; /* Цвет текста баланса */
         }
 
+        .debt {
+            margin-top: 10px;
+            display: none; /* Скрыто по умолчанию */
+            font-size: 16px; /* Размер шрифта для сообщения */
+            color: #ffdd57; /* Цвет текста долга */
+        }
+
         .error-message {
             margin-top: 10px;
             font-size: 14px; /* Размер шрифта для сообщения об ошибке */
@@ -122,19 +129,16 @@
                 <input type="text" id="username" placeholder="Логин" required>
                 <input type="password" id="password" placeholder="Пароль" required>
                 <button type="submit" class="login-button">Войти</button>
-                <!-- Кнопка "Тапалка (бета)", которая пока ничего не делает -->
                 <button type="button" class="tapalka-button" onclick="openTapalka()">Тапалка (бета)</button> 
-                <!-- Убрали кнопку "Перевести" с экрана входа -->
-                </form>
+            </form>
          </div>
 
-         <!-- Поле для отображения информации о пользователе -->
          <div id="userInfo" style="display:none;">
              <div class="current-login" id="currentLogin"></div> <!-- Поле для текущего логина -->
              <div class="message" id="message"></div> <!-- Сообщение о балансе -->
+             <div class="debt" id="debt"></div> <!-- Поле для отображения долга -->
              <button class="translate-button" onclick="showIframe()">Перевести</button> <!-- Кнопка "Перевести" -->
              <button class="logout-button" onclick="logout()">Выход</button> <!-- Кнопка "Выход" -->
-             <!-- Кнопка "Тапалка (бета)" также добавлена здесь -->
              <button class="tapalka-button" onclick="openTapalka()">Тапалка (бета)</button> 
          </div>
 
@@ -176,23 +180,23 @@
              document.getElementById('errorMessage').style.display = 'none';
 
              if (username === 'ladidon' && password === '23975Bq12') {
-                 showBalance('Баланс: 75', username);
+                 showBalance('Баланс: 75', 'Долг: 0', username);
                  return;
 
              } else if (username === 'Alihansao2' && password === '1909') {
-                 showBalance('Баланс: 0', username);
+                 showBalance('Баланс: 0', 'Долг: 0', username);
                  return;
 
              } else if (username === 'nevel' && password === '532') {
-                 showBalance('Баланс: 0', username);
+                 showBalance('Баланс: 0', 'Долг: 0', username);
                  return;
 
              } else if (username === 'howosy' && password === 'ladidonGandon001') {
-                 showBalance('Баланс: 1238', username);
+                 showBalance('Баланс: 1238', 'Долг: 0', username);
                  return;
                  
              } else if (username === 'zeper' && password === 'sigmapill999') {
-                 showBalance('Баланс: 0', username);
+                 showBalance('Баланс: 0', 'Долг: 0', username);
                  return;
 
              } else {
@@ -200,18 +204,21 @@
                  document.getElementById('errorMessage').textContent = 'Неверный логин или пароль';
                  document.getElementById('errorMessage').style.display = 'block'; // Показываем сообщение об ошибке
                  document.getElementById('message').style.display = 'none'; // Скрываем успешное сообщение
+                 document.getElementById('debt').style.display = 'none'; // Скрываем долг
              }
          }
 
-         function showBalance(balanceMessage, username) {
+         function showBalance(balanceMessage, debtMessage, username) {
              // Скрываем форму входа и показываем информацию о пользователе
              document.getElementById('formContainer').style.display = 'none';
              document.getElementById('userInfo').style.display = 'block'; // Показываем информацию о пользователе
 
              document.getElementById('message').textContent = balanceMessage; // Отображаем баланс
-             document.getElementById('message').style.display = 'block'; // Показываем сообщение
+             document.getElementById('message').style.display = 'block';
 
-             // Показываем текущий логин
+             document.getElementById('debt').textContent = debtMessage; // Отображаем долг
+             document.getElementById('debt').style.display = 'block';
+
              document.getElementById('currentLogin').textContent = `Текущий логин: ${username}`;
              document.getElementById('currentLogin').style.display = 'block';
          }
@@ -221,22 +228,14 @@
          }
 
          function logout() {
-             // Удаляем данные из localStorage
+             // Удаляем сохраненные данные входа из localStorage
              localStorage.removeItem('username');
              localStorage.removeItem('password');
 
-             // Скрываем информацию о пользователе и показываем форму входа
+             // Скрываем информацию о пользователе и возвращаемся к форме входа
              document.getElementById('userInfo').style.display = 'none';
              document.getElementById('formContainer').style.display = 'block';
-
-             // Очищаем поля ввода
-             document.getElementById('username').value = '';
-             document.getElementById('password').value = '';
          }
-
-         function openTapalka() {
-              window.open("https://t.me/naebank1_bot/clicker", "_blank"); // Открывает ссылку в новой вкладке
-          }
      </script>
 </body>
 </html>
