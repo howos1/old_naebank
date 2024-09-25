@@ -97,14 +97,26 @@
             margin-top: 20px;
             display: none; /* Скрыто по умолчанию */
             font-size: 16px; /* Размер шрифта для сообщения */
-            color: #ffdd57; /* Цвет текста баланса */
+            color: #ffdd57; /* Цвет текста */
         }
 
-        .debt {
+        .debt, .netherite {
             margin-top: 10px;
             display: none; /* Скрыто по умолчанию */
             font-size: 16px; /* Размер шрифта для сообщения */
-            color: #ffdd57; /* Цвет текста долга */
+            color: #ffdd57; /* Цвет текста */
+        }
+
+        .debt {
+            color: #ffdd57; /* Цвет долга такой же, как у текущего логина */
+        }
+
+        .netherite {
+            color: #555; /* Темно-серый для Незерита */
+        }
+
+        .message {
+            color: #00bfff; /* Голубой цвет для Алмазов */
         }
 
         .error-message {
@@ -135,7 +147,8 @@
 
          <div id="userInfo" style="display:none;">
              <div class="current-login" id="currentLogin"></div> <!-- Поле для текущего логина -->
-             <div class="message" id="message"></div> <!-- Сообщение о балансе -->
+             <div class="message" id="message"></div> <!-- Сообщение об алмазах -->
+             <div class="netherite" id="netherite"></div> <!-- Поле для отображения незерита -->
              <div class="debt" id="debt"></div> <!-- Поле для отображения долга -->
              <button class="translate-button" onclick="showIframe()">Перевести</button> <!-- Кнопка "Перевести" -->
              <button class="logout-button" onclick="logout()">Выход</button> <!-- Кнопка "Выход" -->
@@ -150,15 +163,12 @@
      </div>
 
      <script>
-         // Проверяем, есть ли сохраненные данные входа в localStorage
          const savedUsername = localStorage.getItem('username');
          const savedPassword = localStorage.getItem('password');
 
          if (savedUsername && savedPassword) {
-             // Если данные есть, автоматически входим и показываем баланс
              handleLogin(savedUsername, savedPassword);
          } else {
-             // Если данных нет, показываем форму входа
              document.getElementById('formContainer').style.display = 'block';
          }
 
@@ -168,7 +178,6 @@
              const username = document.getElementById('username').value;
              const password = document.getElementById('password').value;
 
-             // Сохраняем данные входа в localStorage
              localStorage.setItem('username', username);
              localStorage.setItem('password', password);
 
@@ -176,64 +185,64 @@
          };
 
          function handleLogin(username, password) {
-             // Скрываем сообщение об ошибке при новой попытке входа
              document.getElementById('errorMessage').style.display = 'none';
 
              if (username === 'ladidon' && password === '23975Bq12') {
-                 showBalance('Баланс: 27', 'Долг: 65', username);
+                 showBalance('Алмазы: 27', 'Незерит: 0', 'Долг: 65', username);
                  return;
 
              } else if (username === 'Alihansao2' && password === '1909') {
-                 showBalance('Баланс: 0', 'Долг: 20', username);
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 20', username);
                  return;
 
              } else if (username === 'nevel' && password === '532') {
-                 showBalance('Баланс: 0', 'Долг: 75', username);
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 75', username);
                  return;
 
              } else if (username === 'HoWoSy' && password === 'parolkarolebat') {
-                 showBalance('Баланс: 1737', 'Долга нема и не буде', username);
+                 showBalance('Алмазы: 1737', 'Незерит: 11', 'Долга нема и не буде', username);
                  return;
-                 
+
              } else if (username === 'zeper' && password === 'sigmapill999') {
-                 showBalance('Баланс: 0', 'Долг: 16', username);
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 16', username);
                  return;
 
              } else if (username === 'Alfr3ndd' && password === '78465') {
-                 showBalance('Баланс: 6', 'Долг: 90', username);
-                 return;
-                 
-             } else if (username === 'kunsteins1488' && password === 'huy123') {
-                 showBalance('Баланс: 433', 'Долг: 0', username);
-                 return;
-                 
-             } else if (username === 'test' && password === 'test') {
-                 showBalance('Баланс: 0', 'Долг: 0', username);
-                 return;
-                 
-             } else if (username === 'test1' && password === 'test') {
-                 showBalance('Баланс: 0', 'Долг: 0', username);
+                 showBalance('Алмазы: 6', 'Незерит: 0', 'Долг: 90', username);
                  return;
 
+             } else if (username === 'kunsteins1488' && password === 'huy123') {
+                 showBalance('Алмазы: 433', 'Незерит: 0', 'Долг: 0', username);
+                 return;
+
+             } else if (username === 'test0' && password === 'test0') {
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', username);
+                 return;
+
+             } else if (username === 'test1' && password === 'test1') {
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', username);
+                 return;
 
              } else {
-                 // Показать сообщение об ошибке
                  document.getElementById('errorMessage').textContent = 'Неверный логин или пароль';
-                 document.getElementById('errorMessage').style.display = 'block'; // Показываем сообщение об ошибке
-                 document.getElementById('message').style.display = 'none'; // Скрываем успешное сообщение
-                 document.getElementById('debt').style.display = 'none'; // Скрываем долг
+                 document.getElementById('errorMessage').style.display = 'block';
+                 document.getElementById('message').style.display = 'none';
+                 document.getElementById('netherite').style.display = 'none';
+                 document.getElementById('debt').style.display = 'none';
              }
          }
 
-         function showBalance(balanceMessage, debtMessage, username) {
-             // Скрываем форму входа и показываем информацию о пользователе
+         function showBalance(balanceMessage, netheriteMessage, debtMessage, username) {
              document.getElementById('formContainer').style.display = 'none';
-             document.getElementById('userInfo').style.display = 'block'; // Показываем информацию о пользователе
+             document.getElementById('userInfo').style.display = 'block';
 
-             document.getElementById('message').textContent = balanceMessage; // Отображаем баланс
+             document.getElementById('message').textContent = balanceMessage;
              document.getElementById('message').style.display = 'block';
 
-             document.getElementById('debt').textContent = debtMessage; // Отображаем долг
+             document.getElementById('netherite').textContent = netheriteMessage;
+             document.getElementById('netherite').style.display = 'block';
+
+             document.getElementById('debt').textContent = debtMessage;
              document.getElementById('debt').style.display = 'block';
 
              document.getElementById('currentLogin').textContent = `Текущий логин: ${username}`;
@@ -245,16 +254,13 @@
          }
 
          function logout() {
-             // Удаляем сохраненные данные входа из localStorage
              localStorage.removeItem('username');
              localStorage.removeItem('password');
 
-             // Скрываем информацию о пользователе и возвращаемся к форме входа
              document.getElementById('userInfo').style.display = 'none';
              document.getElementById('formContainer').style.display = 'block';
          }
 
-         // Функция для открытия сайта через кнопку "Тапалка (бета)"
          function openTapalka() {
              window.open('https://t.me/naebank1_bot/clicker', '_blank');
          }
