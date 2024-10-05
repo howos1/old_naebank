@@ -130,6 +130,44 @@
             font-size: 16px; /* Размер шрифта для текущего логина */
             color: #ffdd57; /* Цвет текста текущего логина */
         }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Темный фон с прозрачностью */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1a1a2e;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #ffdd57;
+            font-size: 18px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-button {
+            margin-top: 15px;
+            background-color: #ff4757;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .close-button:hover {
+            background-color: #e84118;
+        }
     </style>
 </head>
 <body>
@@ -150,13 +188,17 @@
              <div class="message" id="message"></div> <!-- Сообщение об алмазах -->
              <div class="netherite" id="netherite"></div> <!-- Поле для отображения незерита -->
              <div class="debt" id="debt"></div> <!-- Поле для отображения долга -->
-             <button class="translate-button" onclick="showIframe()">Перевести</button> <!-- Кнопка "Перевести" -->
+             <button class="translate-button" onclick="showModal()">Перевести</button> <!-- Кнопка "Перевести" -->
              <button class="logout-button" onclick="logout()">Выход</button> <!-- Кнопка "Выход" -->
              <button class="tapalka-button" onclick="openTapalka()">Тапалка (бета)</button> 
          </div>
 
-         <div class="iframe-container" id="iframeContainer">
-             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdrax9jYifnv1D8X5t0M4eleigWt69AlKSmYJJMN5-UM9JeHQ/viewform?embedded=true" width="325" height="400" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+         <!-- Модальное окно -->
+         <div id="translateModal" class="modal">
+             <div class="modal-content">
+                 Временно Недоступно
+                 <button class="close-button" onclick="closeModal()">Закрыть</button>
+             </div>
          </div>
 
          <div class="error-message" id="errorMessage"></div> <!-- Поле для сообщения об ошибке -->
@@ -249,8 +291,12 @@
              document.getElementById('currentLogin').style.display = 'block';
          }
 
-         function showIframe() {
-             document.getElementById('iframeContainer').style.display = 'block';
+         function showModal() {
+             document.getElementById('translateModal').style.display = 'flex'; // Показываем модальное окно
+         }
+
+         function closeModal() {
+             document.getElementById('translateModal').style.display = 'none'; // Закрываем модальное окно
          }
 
          function logout() {
