@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>НаеБанк - Авторизация</title>
+    <title>НаеБаНК - Авторизация</title>
     <style>
         body {
-            background-color: #2c2c54; /* Темный фон */
-            color: #ffffff; /* Белый текст */
+            background-color: #2c2c54;
+            color: #ffffff;
             font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
@@ -17,7 +17,7 @@
         }
 
         .container {
-            background-color: #1a1a2e; /* Темный контейнер */
+            background-color: #1a1a2e;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -27,6 +27,16 @@
 
         h1 {
             margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1 .beta {
+            font-size: 12px;
+            color: #ff4757;
+            position: absolute;
+            top: -5px;
+            right: -30px;
         }
 
         input[type="text"], input[type="password"] {
@@ -35,14 +45,14 @@
             margin-bottom: 15px;
             border-radius: 5px;
             border: none;
-            background-color: #333; /* Темный фон для полей */
-            color: #fff; /* Белый текст в полях */
-            font-size: 14px; /* Размер шрифта */
+            background-color: #333;
+            color: #fff;
+            font-size: 14px;
         }
 
         input[type="text"]:focus, input[type="password"]:focus {
-            outline: none; /* Убираем обводку при фокусе */
-            background-color: #444; /* Светлее при фокусе */
+            outline: none;
+            background-color: #444;
         }
 
         button {
@@ -55,87 +65,86 @@
         }
 
         .login-button {
-            background-color: #4CAF50; /* Зеленая кнопка для входа */
+            background-color: #4CAF50;
         }
 
         .login-button:hover {
-            background-color: #45a049; /* Светлее при наведении */
+            background-color: #45a049;
         }
 
         .tapalka-button {
-            background-color: #800080; /* Фиолетовая кнопка "Тапалка (бета)" */
-            margin-top: 10px; /* Отступ сверху для кнопки "Тапалка (бета)" */
+            background-color: #800080;
+            margin-top: 10px;
         }
 
         .tapalka-button:hover {
-            background-color: #6a006a; /* Темнее при наведении на кнопку "Тапалка (бета)" */
+            background-color: #6a006a;
         }
 
         .translate-button {
-            background-color: #d4c200; /* Темно-желтая кнопка для перевода */
+            background-color: #d4c200;
             margin-top: 15px;
         }
 
         .translate-button:hover {
-            background-color: #b3a600; /* Темнее при наведении */
+            background-color: #b3a600;
         }
 
         .logout-button {
-            background-color: #ff4757; /* Красная кнопка для выхода */
-            margin-top: 10px; /* Добавлен пробел между кнопками */
+            background-color: #ff4757;
+            margin-top: 10px;
         }
 
         .logout-button:hover {
-            background-color: #e84118; /* Темнее при наведении */
+            background-color: #e84118;
         }
 
         .iframe-container {
-            display: none; /* Скрываем iframe по умолчанию */
-        }
-
-        .message {
-            margin-top: 20px;
-            display: none; /* Скрыто по умолчанию */
-            font-size: 16px; /* Размер шрифта для сообщения */
-            color: #ffdd57; /* Цвет текста */
-        }
-
-        .debt, .netherite {
-            margin-top: 10px;
-            display: none; /* Скрыто по умолчанию */
-            font-size: 16px; /* Размер шрифта для сообщения */
-            color: #ffdd57; /* Цвет текста */
-        }
-
-        .debt {
-            color: #ffdd57; /* Цвет долга такой же, как у текущего логина */
-        }
-        
-        .invest {
-            color: #ffdd57; /* Цвет долга такой же, как у текущего логина */
-        }
-
-        .netherite {
-            color: #555; /* Темно-серый для Незерита */
+            display: none;
         }
 
         .diam {
-            color: #00bfff; /* Голубой цвет для Алмазов */
+            margin-top: 20px;
+            display: none;
+            font-size: 16px;
+            color: #ffdd57;
+        }
+
+        .debt, .netherite, .invest {
+            margin-top: 10px;
+            display: none;
+            font-size: 16px;
+            color: #ffdd57;
+        }
+
+        .debt {
+            color: #ffdd57;
+        }
+        
+        .invest {
+            color: #32CD32;
+        }
+
+        .netherite {
+            color: #555;
+        }
+
+        .diam {
+            color: #00bfff;
         }
 
         .error-message {
             margin-top: 10px;
-            font-size: 14px; /* Размер шрифта для сообщения об ошибке */
-            color: #ff4757; /* Цвет текста ошибки */
+            font-size: 14px;
+            color: #ff4757;
         }
 
         .current-login {
             margin-top: 10px;
-            font-size: 16px; /* Размер шрифта для текущего логина */
-            color: #ffdd57; /* Цвет текста текущего логина */
+            font-size: 16px;
+            color: #ffdd57;
         }
 
-        /* Стили для модального окна */
         .modal {
             display: none;
             position: fixed;
@@ -144,7 +153,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* Темный фон с прозрачностью */
+            background-color: rgba(0, 0, 0, 0.8);
             justify-content: center;
             align-items: center;
         }
@@ -176,7 +185,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>НаеБанк</h1>
+        <h1>НаеБаНК<span id="betaTag" class="beta"></span></h1>
         
         <div class="form-container" id="formContainer">
             <form id="loginForm">
@@ -191,13 +200,13 @@
              <div class="current-login" id="currentLogin"></div>
              <div class="diam" id="diam"></div>
              <div class="netherite" id="netherite"></div>
+             <div class="invest" id="invest"></div>
              <div class="debt" id="debt"></div>
              <button class="translate-button" onclick="showModal()">Перевести</button>
              <button class="logout-button" onclick="logout()">Выход</button>
              <button class="tapalka-button" onclick="openTapalka()">Тапалка (бета)</button> 
          </div>
 
-         <!-- Модальное окно -->
          <div id="translateModal" class="modal">
              <div class="modal-content">
                  Временно Недоступно
@@ -234,7 +243,7 @@
              document.getElementById('errorMessage').style.display = 'none';
 
              if (username === 'ladidon' && password === '23975Bq12') {
-                 showBalance('Алмазы: 34', 'Незерит: 6', 'Долг: 0', 'ladidon');
+                 showBalance('Алмазы: 34', 'Незерит: 6', 'Долг: 0', '', 'ladidon');
                  return;
 
              } else if (username === 'alihansao2' && password === '1909') {
@@ -242,55 +251,55 @@
                  return;
 
              } else if (username === 'nevelionium' && password === '532') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 75', 'nevelionium');
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 75', '', 'nevelionium');
                  return;
 
              } else if (username === 'howosy' && password === 'parolkarolebat') {
-                 showBalance('Алмазы: 1963', 'Незерит: 10', 'Долга нема и не буде', 'HoWoSy');
+                 showBalance('Алмазы: 1963', 'Незерит: 10', 'Долга нема и не буде', '', 'HoWoSy');
                  return;
 
              } else if (username === 'zeper' && password === 'sigmapill999') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 16', 'zeper');
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 16', '', 'zeper');
                  return;
 
              } else if (username === 'alfr3ndd' && password === '78465') {
-                 showBalance('Алмазы: 0', 'Незерит: 3', 'Долг: 40', 'Alfr3ndd');
+                 showBalance('Алмазы: 0', 'Незерит: 3', 'Долг: 40', '', 'Alfr3ndd');
                  return;
 
              } else if (username === 'kunsteins1488' && password === 'huy123') {
-                 showBalance('Алмазы: 177', 'Незерит: 0', 'Долг: 40', 'kunsteins1488');
+                 showBalance('Алмазы: 177', 'Незерит: 0', 'Долг: 40', '', 'kunsteins1488');
                  return;
 
              } else if (username === 'vlafii' && password === 'hhw92lo0') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', 'Vlafii');
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'Vlafii');
                  return;
                  
              } else if (username === 'aliplay2000' && password === '2000Ali21') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', 'AliPlay2000');
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'AliPlay2000');
                  return;
                  
              } else if (username === 'howosy2' && password === 'parolkarolebat') {
-                 showBalance('Алмазы: 24', 'Незерит: 0', 'Долга нема и не буде', 'HoWoSy2');
+                 showBalance('Алмазы: 24', 'Незерит: 0', 'Долга нема и не буде', '', 'HoWoSy2');
                  return;
 
              } else if (username === 'lover_0770' && password === 'ry_0770') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', 'Lover_0770');
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'Lover_0770');
                  return;
 
              } else if (username === 'demonpro100' && password === 'parolkarolebat') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', 'DemonPro100');
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'DemonPro100');
                  return;
 
              } else if (username === 'nevis32' && password === 'nevis32') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', 'nevis32');
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'nevis32');
                  return;
                  
              } else if (username === 'test0' && password === 'test0') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', 'test0');
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'test0');
                  return;
                  
              } else if (username === 'test1' && password === 'test1') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', 'test1');
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'test1');
                  return;
                  
              } else {
@@ -298,25 +307,36 @@
                  document.getElementById('errorMessage').style.display = 'block';
                  document.getElementById('diam').style.display = 'none';
                  document.getElementById('netherite').style.display = 'none';
+                 document.getElementById('invest').style.display = 'none';
                  document.getElementById('debt').style.display = 'none';
              }
          }
 
-         function showBalance(balanceMessage, netheriteMessage, debtMessage, username) {
+         function showBalance(balance, netherite, debt, invest, username) {
              document.getElementById('formContainer').style.display = 'none';
              document.getElementById('userInfo').style.display = 'block';
 
-             document.getElementById('diam').textContent = balanceMessage;
+             document.getElementById('diam').textContent = balance;
              document.getElementById('diam').style.display = 'block';
 
-             document.getElementById('netherite').textContent = netheriteMessage;
+             document.getElementById('netherite').textContent = netherite;
              document.getElementById('netherite').style.display = 'block';
 
-             document.getElementById('debt').textContent = debtMessage;
+             document.getElementById('debt').textContent = debt;
              document.getElementById('debt').style.display = 'block';
+
+             document.getElementById('invest').textContent = invest;
+             document.getElementById('invest').style.display = 'block';
 
              document.getElementById('currentLogin').textContent = `Текущий логин: ${username}`;
              document.getElementById('currentLogin').style.display = 'block';
+
+             // Если есть инвестиции, добавляем приписку "Beta"
+             if (invest) {
+                 document.getElementById('betaTag').textContent = 'Beta';
+             } else {
+                 document.getElementById('betaTag').textContent = '';
+             }
          }
 
          function showModal() {
@@ -333,6 +353,7 @@
 
              document.getElementById('userInfo').style.display = 'none';
              document.getElementById('formContainer').style.display = 'block';
+             document.getElementById('betaTag').textContent = ''; // Убираем приписку "Beta" при выходе
          }
 
          function openTapalka() {
