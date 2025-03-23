@@ -293,6 +293,10 @@
              } else if (username === 'nevis32' && password === 'nevis32') {
                  showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'nevis32');
                  return;
+
+             } else if (username === 'Dottik' && password === 'IDI_NAXUI') {
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', 'Инвестиции: 0 Алм', 'test1');
+                 return;
                  
              } else if (username === 'test0' && password === 'test0') {
                  showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'test0');
@@ -301,7 +305,7 @@
              } else if (username === 'test1' && password === 'test1') {
                  showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'test1');
                  return;
-                 
+
              } else {
                  document.getElementById('errorMessage').textContent = 'Неверный логин или пароль';
                  document.getElementById('errorMessage').style.display = 'block';
