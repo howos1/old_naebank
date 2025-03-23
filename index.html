@@ -331,7 +331,6 @@
              document.getElementById('currentLogin').textContent = `Текущий логин: ${username}`;
              document.getElementById('currentLogin').style.display = 'block';
 
-             // Если есть инвестиции, добавляем приписку "Beta"
              if (invest) {
                  document.getElementById('betaTag').textContent = 'Beta';
              } else {
@@ -353,7 +352,7 @@
 
              document.getElementById('userInfo').style.display = 'none';
              document.getElementById('formContainer').style.display = 'block';
-             document.getElementById('betaTag').textContent = ''; // Убираем приписку "Beta" при выходе
+             document.getElementById('betaTag').textContent = '';
          }
 
          function openTapalka() {
