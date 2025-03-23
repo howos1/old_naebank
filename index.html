@@ -110,12 +110,16 @@
         .debt {
             color: #ffdd57; /* Цвет долга такой же, как у текущего логина */
         }
+        
+        .invest {
+            color: #ffdd57; /* Цвет долга такой же, как у текущего логина */
+        }
 
         .netherite {
             color: #555; /* Темно-серый для Незерита */
         }
 
-        .message {
+        .diam {
             color: #00bfff; /* Голубой цвет для Алмазов */
         }
 
@@ -184,12 +188,13 @@
          </div>
 
          <div id="userInfo" style="display:none;">
-             <div class="current-login" id="currentLogin"></div> <!-- Поле для текущего логина -->
-             <div class="message" id="message"></div> <!-- Сообщение об алмазах -->
-             <div class="netherite" id="netherite"></div> <!-- Поле для отображения незерита -->
-             <div class="debt" id="debt"></div> <!-- Поле для отображения долга -->
-             <button class="translate-button" onclick="showModal()">Перевести</button> <!-- Кнопка "Перевести" -->
-             <button class="logout-button" onclick="logout()">Выход</button> <!-- Кнопка "Выход" -->
+             <div class="current-login" id="currentLogin"></div>
+             <div class="diam" id="diam"></div>
+             <div class="netherite" id="netherite"></div>
+             <div class="invest" id="invest"></div>
+             <div class="debt" id="debt"></div>
+             <button class="translate-button" onclick="showModal()">Перевести</button>
+             <button class="logout-button" onclick="logout()">Выход</button>
              <button class="tapalka-button" onclick="openTapalka()">Тапалка (бета)</button> 
          </div>
 
@@ -201,7 +206,7 @@
              </div>
          </div>
 
-         <div class="error-message" id="errorMessage"></div> <!-- Поле для сообщения об ошибке -->
+         <div class="error-message" id="errorMessage"></div>
      </div>
 
      <script>
@@ -217,8 +222,8 @@
          document.getElementById('loginForm').onsubmit = function(event) {
              event.preventDefault();
 
-             const username = document.getElementById('username').value.toLowerCase(); // Преобразуем в нижний регистр
-             const password = document.getElementById('password').value.toLowerCase(); // Преобразуем в нижний регистр
+             const username = document.getElementById('username').value.toLowerCase();
+             const password = document.getElementById('password').value.toLowerCase();
 
              localStorage.setItem('username', username);
              localStorage.setItem('password', password);
@@ -234,7 +239,7 @@
                  return;
 
              } else if (username === 'alihansao2' && password === '1909') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 78', 'Alihansao2');
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 78', 'Инвестиции: 0 Алм', 'Alihansao2');
                  return;
 
              } else if (username === 'nevelionium' && password === '532') {
@@ -316,11 +321,11 @@
          }
 
          function showModal() {
-             document.getElementById('translateModal').style.display = 'flex'; // Показываем модальное окно
+             document.getElementById('translateModal').style.display = 'flex';
          }
 
          function closeModal() {
-             document.getElementById('translateModal').style.display = 'none'; // Закрываем модальное окно
+             document.getElementById('translateModal').style.display = 'none';
          }
 
          function logout() {
