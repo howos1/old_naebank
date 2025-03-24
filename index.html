@@ -4,11 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>НаеБанк - Авторизация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --primary-dark: #5649c0;
+            --secondary-color: #00cec9;
+            --dark-bg: #1e272e;
+            --darker-bg: #161d22;
+            --light-text: #f5f6fa;
+            --accent-yellow: #fdcb6e;
+            --accent-red: #ff7675;
+            --accent-green: #55efc4;
+            --accent-blue: #74b9ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            background-color: #2c2c54;
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+            color: var(--light-text);
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -16,221 +36,461 @@
             min-height: 100vh;
             margin: 0;
             position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjMWEyMDI1Ij48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiMyMjI4MzAiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=');
+            opacity: 0.3;
+            z-index: -1;
         }
 
         .container {
-            background-color: #1a1a2e;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            width: 300px;
+            background: rgba(30, 39, 46, 0.9);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 380px;
             text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.3s ease;
         }
 
-        h1 {
-            margin-bottom: 20px;
+        .container:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
             position: relative;
-            display: inline-block;
         }
 
-        h1 .beta {
-            font-size: 12px;
-            color: #ff4757;
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(108, 92, 231, 0.3);
+            letter-spacing: 1px;
+        }
+
+        .beta-tag {
             position: absolute;
-            top: -5px;
+            top: -10px;
             right: -30px;
+            background: var(--accent-yellow);
+            color: var(--dark-bg);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            transform: rotate(15deg);
         }
 
-        input[type="text"], input[type="password"] {
-            width: calc(100% - 20px);
-            padding: 8px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            border: none;
-            background-color: #333;
-            color: #fff;
-            font-size: 14px;
+        input[type="text"], 
+        input[type="password"] {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.2rem;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--light-text);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
         }
 
-        input[type="text"]:focus, input[type="password"]:focus {
+        input[type="text"]:focus, 
+        input[type="password"]:focus {
             outline: none;
-            background-color: #444;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
         }
 
         button {
             width: 100%;
-            padding: 10px;
+            padding: 0.8rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
         }
 
         .login-button {
-            background-color: #4CAF50;
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+            margin-bottom: 0.8rem;
         }
 
         .login-button:hover {
-            background-color: #45a049;
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
         }
 
         .tapalka-button {
-            background-color: #800080;
-            margin-top: 10px;
+            background: linear-gradient(to right, #8e44ad, #9b59b6);
+            margin: 0.8rem 0;
         }
 
         .tapalka-button:hover {
-            background-color: #6a006a;
+            background: linear-gradient(to right, #9b59b6, #8e44ad);
         }
 
         .translate-button {
-            background-color: #d4c200;
-            margin-top: 15px;
+            background: linear-gradient(to right, var(--secondary-color), #00b894);
         }
 
         .translate-button:hover {
-            background-color: #b3a600;
+            background: linear-gradient(to right, #00b894, var(--secondary-color));
         }
 
         .logout-button {
-            background-color: #ff4757;
-            margin-top: 10px;
+            background: linear-gradient(to right, var(--accent-red), #e84393);
+            margin: 0.8rem 0;
         }
 
         .logout-button:hover {
-            background-color: #e84118;
+            background: linear-gradient(to right, #e84393, var(--accent-red));
         }
 
-        .iframe-container {
+        .user-info {
             display: none;
-        }
-
-        .diam {
-            margin-top: 20px;
-            display: none;
-            font-size: 16px;
-            color: #ffdd57;
-        }
-
-        .debt, .netherite, .invest {
-            margin-top: 10px;
-            display: none;
-            font-size: 16px;
-            color: #ffdd57;
-        }
-
-        .debt {
-            color: #ffdd57;
-        }
-        
-        .invest {
-            color: #32CD32;
-        }
-
-        .netherite {
-            color: #555;
-        }
-
-        .diam {
-            color: #00bfff;
-        }
-
-        .error-message {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #ff4757;
+            animation: fadeIn 0.5s ease;
         }
 
         .current-login {
-            margin-top: 10px;
-            font-size: 16px;
-            color: #ffdd57;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+
+        .balance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border-left: 4px solid;
+            animation: slideIn 0.3s ease;
+        }
+
+        .balance-item:nth-child(1) {
+            border-left-color: var(--accent-blue);
+        }
+
+        .balance-item:nth-child(2) {
+            border-left-color: #636e72;
+        }
+
+        .balance-item:nth-child(3) {
+            border-left-color: var(--accent-yellow);
+        }
+
+        .balance-item:nth-child(4) {
+            border-left-color: var(--accent-green);
+        }
+
+        .balance-label {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .balance-value {
+            font-weight: 600;
+        }
+
+        .error-message {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: rgba(255, 118, 117, 0.2);
+            color: var(--accent-red);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+            animation: shake 0.5s;
         }
 
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 100;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--dark-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal-text {
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+
+        .close-button {
+            background: var(--accent-red);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1rem;
         }
 
         footer {
             position: absolute;
-            bottom: 10px;
+            bottom: 1rem;
             width: 100%;
             text-align: center;
         }
 
-        footer .powered {
-            color: #ffffff;
-            font-size: 12px;
-            opacity: 0.7;
+        .powered-by {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
         }
 
-        .modal-content {
-            background-color: #1a1a2e;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            color: #ffdd57;
-            font-size: 18px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        .powered-by a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s;
         }
 
-        .close-button {
-            margin-top: 15px;
-            background-color: #ff4757;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
+        .powered-by a:hover {
+            color: var(--accent-green);
         }
 
-        .close-button:hover {
-            background-color: #e84118;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        @keyframes modalFadeIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Анимация фона */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.1) 0%, rgba(108, 92, 231, 0) 70%);
+            animation: float 15s infinite linear;
+        }
+
+        .bg-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .bg-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: -30px;
+            right: -30px;
+            animation-delay: 3s;
+        }
+
+        .bg-circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 30%;
+            right: -50px;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(20px, 20px) rotate(180deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
     <div class="container">
-        <h1>НаеБанк<span id="betaTag" class="beta"></span></h1>
+        <div class="logo">
+            <h1 class="logo-text">НаеБанк</h1>
+            <span id="betaTag" class="beta-tag"></span>
+        </div>
         
         <div class="form-container" id="formContainer">
             <form id="loginForm">
-                <input type="text" id="username" placeholder="Логин" required>
-                <input type="password" id="password" placeholder="Пароль" required>
-                <button type="submit" class="login-button">Войти</button>
-                <button type="button" class="tapalka-button" onclick="openTapalka()">Тапалка (бета)</button> 
+                <input type="text" id="username" placeholder="Введите логин" required>
+                <input type="password" id="password" placeholder="Введите пароль" required>
+                <button type="submit" class="login-button">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Войти
+                </button>
+                <button type="button" class="tapalka-button" onclick="openTapalka()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Тапалка (бета)
+                </button> 
             </form>
          </div>
 
-         <div id="userInfo" style="display:none;">
+         <div class="user-info" id="userInfo">
              <div class="current-login" id="currentLogin"></div>
-             <div class="diam" id="diam"></div>
-             <div class="netherite" id="netherite"></div>
-             <div class="invest" id="invest"></div>
-             <div class="debt" id="debt"></div>
-             <button class="translate-button" onclick="window.open('https://t.me/naebank1_bot/perevod', '_blank')">Перевести</button>
-             <button class="logout-button" onclick="logout()">Выход</button>
-             <button class="tapalka-button" onclick="openTapalka()">Тапалка (бета)</button> 
+             
+             <div class="balance-item" id="diam" style="display:none;">
+                 <span class="balance-label">Алмазы:</span>
+                 <span class="balance-value" id="diamValue">0</span>
+             </div>
+             
+             <div class="balance-item" id="netherite" style="display:none;">
+                 <span class="balance-label">Незерит:</span>
+                 <span class="balance-value" id="netheriteValue">0</span>
+             </div>
+             
+             <div class="balance-item" id="invest" style="display:none;">
+                 <span class="balance-label">Инвестиции:</span>
+                 <span class="balance-value" id="investValue">0 Алм</span>
+             </div>
+             
+             <div class="balance-item" id="debt" style="display:none;">
+                 <span class="balance-label">Долг:</span>
+                 <span class="balance-value" id="debtValue">0</span>
+             </div>
+             
+             <button class="translate-button" onclick="window.open('https://t.me/naebank1_bot/perevod', '_blank')">
+                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M12 19L19 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                     <path d="M5 19L12 12L5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                 </svg>
+                 Перевести
+             </button>
+             
+             <button class="logout-button" onclick="logout()">
+                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                     <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                     <path d="M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                 </svg>
+                 Выход
+             </button>
+             
+             <button class="tapalka-button" onclick="openTapalka()">
+                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                 </svg>
+                 Тапалка (бета)
+             </button> 
          </div>
 
          <div id="translateModal" class="modal">
              <div class="modal-content">
-                 Временно Недоступно
+                 <div class="modal-text">Временно Недоступно</div>
                  <button class="close-button" onclick="closeModal()">Закрыть</button>
              </div>
          </div>
 
          <div class="error-message" id="errorMessage"></div>
      </div>
+
+     <footer>
+         <p class="powered-by">Powered by WaterCloud</a></p>
+     </footer>
 
      <script>
          const savedUsername = localStorage.getItem('username');
@@ -258,71 +518,71 @@
              document.getElementById('errorMessage').style.display = 'none';
 
              if (username === 'ladidon' && password === '23975bq12') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '',);
+                 showBalance('0', '0', '0', '', 'ladidon');
                  return;
 
              } else if (username === 'alihansao2' && password === '1909') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 78', 'Инвестиции: 0 Алм', 'Alihansao2');
+                 showBalance('0', '0', '78', '0 Алм', 'Alihansao2');
                  return;
 
              } else if (username === 'nevelionium' && password === '532') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 75', '', 'nevelionium');
+                 showBalance('0', '0', '75', '', 'nevelionium');
                  return;
 
              } else if (username === 'kaznaQS' && password === 'parolkarolebat') {
-                 showBalance('Алмазы: 1963', 'Незерит: 10', 'Долга нема и не буде', 'Инвестиции: 0 Алм', 'kaznaQS');
+                 showBalance('1963', '10', 'Долга нема и не буде', '0 Алм', 'kaznaQS');
                  return;
 
              } else if (username === 'zeper' && password === 'sigmapill999') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 16', '', 'zeper');
+                 showBalance('0', '0', '16', '', 'zeper');
                  return;
 
              } else if (username === 'alfr3ndd' && password === '78465') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 40', '', 'Alfr3ndd');
+                 showBalance('0', '0', '40', '', 'Alfr3ndd');
                  return;
 
              } else if (username === 'kunsteins1488' && password === 'huy123') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 40', '', 'kunsteins1488');
+                 showBalance('0', '0', '40', '', 'kunsteins1488');
                  return;
 
              } else if (username === 'vlafii' && password === 'hhw92lo0') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'Vlafii');
+                 showBalance('0', '0', '0', '', 'Vlafii');
                  return;
                  
              } else if (username === 'aliplay2000' && password === '2000Ali21') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'AliPlay2000');
+                 showBalance('0', '0', '0', '', 'AliPlay2000');
                  return;
                  
              } else if (username === 'howosy' && password === 'parolkarolebat') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долга нема и не буде', 'Инвестиции: 0 Алм', 'HoWoSy');
+                 showBalance('0', '0', 'Долга нема и не буде', '0 Алм', 'HoWoSy');
                  return;
 
              } else if (username === 'lover_0770' && password === 'ry_0770') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'Lover_0770');
+                 showBalance('0', '0', '0', '', 'Lover_0770');
                  return;
 
              } else if (username === 'demonpro100' && password === 'parolkarolebat') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'DemonPro100');
+                 showBalance('0', '0', '0', '', 'DemonPro100');
                  return;
 
              } else if (username === 'nevis32' && password === 'nevis32') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'nevis32');
+                 showBalance('0', '0', '0', '', 'nevis32');
                  return;
 
              } else if (username === 'dottik' && password === 'idi_naxui') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', 'Инвестиции: 20 Алм', 'Dottik');
+                 showBalance('0', '0', '0', '20 Алм', 'Dottik');
                  return;
 
              } else if (username === 'test0' && password === 'test0') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'test0');
+                 showBalance('0', '0', '0', '', 'test0');
                  return;
 
              } else if (username === 'test1' && password === 'test1') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'test1');
+                 showBalance('0', '0', '0', '', 'test1');
                  return;
 
              } else if (username === 'debug' && password === 'debug') {
-                 showBalance('', '', '', ' ',);
+                 showBalance('', '', '', '', 'debug');
                  return;
 
              } else {
@@ -339,20 +599,35 @@
              document.getElementById('formContainer').style.display = 'none';
              document.getElementById('userInfo').style.display = 'block';
 
-             document.getElementById('diam').textContent = balance;
-             document.getElementById('diam').style.display = 'block';
+             if (balance) {
+                 document.getElementById('diamValue').textContent = balance;
+                 document.getElementById('diam').style.display = 'flex';
+             } else {
+                 document.getElementById('diam').style.display = 'none';
+             }
 
-             document.getElementById('netherite').textContent = netherite;
-             document.getElementById('netherite').style.display = 'block';
+             if (netherite) {
+                 document.getElementById('netheriteValue').textContent = netherite;
+                 document.getElementById('netherite').style.display = 'flex';
+             } else {
+                 document.getElementById('netherite').style.display = 'none';
+             }
 
-             document.getElementById('debt').textContent = debt;
-             document.getElementById('debt').style.display = 'block';
+             if (debt) {
+                 document.getElementById('debtValue').textContent = debt;
+                 document.getElementById('debt').style.display = 'flex';
+             } else {
+                 document.getElementById('debt').style.display = 'none';
+             }
 
-             document.getElementById('invest').textContent = invest;
-             document.getElementById('invest').style.display = 'block';
+             if (invest) {
+                 document.getElementById('investValue').textContent = invest;
+                 document.getElementById('invest').style.display = 'flex';
+             } else {
+                 document.getElementById('invest').style.display = 'none';
+             }
 
-             document.getElementById('currentLogin').textContent = `Текущий логин: ${username}`;
-             document.getElementById('currentLogin').style.display = 'block';
+             document.getElementById('currentLogin').textContent = `Текущий пользователь: ${username}`;
 
              if (invest) {
                  document.getElementById('betaTag').textContent = 'Beta';
@@ -383,7 +658,4 @@
          }
      </script>
 </body>
-<footer>
-    <p class="powered"><b>Powered by WaterCloud</b></p>
-</footer>
 </html>
