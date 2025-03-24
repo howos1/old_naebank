@@ -10,10 +10,12 @@
             color: #ffffff;
             font-family: 'Arial', sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            position: relative;
         }
 
         .container {
@@ -158,6 +160,19 @@
             align-items: center;
         }
 
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        footer .powered {
+            color: #ffffff;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
         .modal-content {
             background-color: #1a1a2e;
             padding: 20px;
@@ -202,7 +217,7 @@
              <div class="netherite" id="netherite"></div>
              <div class="invest" id="invest"></div>
              <div class="debt" id="debt"></div>
-             <button class="translate-button" onclick="showModal()">Перевести</button>
+             <button class="translate-button" onclick="window.open('https://howos1.github.io/naebankperevod/', '_blank')">Перевести</button>
              <button class="logout-button" onclick="logout()">Выход</button>
              <button class="tapalka-button" onclick="openTapalka()">Тапалка (бета)</button> 
          </div>
@@ -242,9 +257,8 @@
          function handleLogin(username, password) {
              document.getElementById('errorMessage').style.display = 'none';
 
-
-                if (username === 'ladidon' && password === '23975Bq12') {
-                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'ladidon');
+             if (username === 'ladidon' && password === '23975bq12') {
+                 showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '',);
                  return;
 
              } else if (username === 'alihansao2' && password === '1909') {
@@ -299,12 +313,16 @@
                  showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', 'Инвестиции: 20 Алм', 'Dottik');
                  return;
 
-             } else if (username === 'test0' && password === 'test1') {
+             } else if (username === 'test0' && password === 'test0') {
                  showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'test0');
                  return;
 
              } else if (username === 'test1' && password === 'test1') {
                  showBalance('Алмазы: 0', 'Незерит: 0', 'Долг: 0', '', 'test1');
+                 return;
+
+             } else if (username === 'debug' && password === 'debug') {
+                 showBalance('', '', '', ' ',);
                  return;
 
              } else {
@@ -365,4 +383,7 @@
          }
      </script>
 </body>
+<footer>
+    <p class="powered"><b>Powered by WaterCloud</b></p>
+</footer>
 </html>
