@@ -17,6 +17,7 @@
             --accent-red: #ff7675;
             --accent-green: #55efc4;
             --accent-blue: #74b9ff;
+            --card-bg: #2d3436;
         }
 
         * {
@@ -57,7 +58,7 @@
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 380px;
+            max-width: 420px;
             text-align: center;
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -161,9 +162,18 @@
             background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
         }
 
+        .action-button {
+            background: linear-gradient(to right, #0984e3, #74b9ff);
+            margin-bottom: 0.8rem;
+        }
+
+        .action-button:hover {
+            background: linear-gradient(to right, #74b9ff, #0984e3);
+        }
+
         .tapalka-button {
             background: linear-gradient(to right, #8e44ad, #9b59b6);
-            margin: 0.8rem 0;
+            margin: 0.4rem 0;
         }
 
         .tapalka-button:hover {
@@ -172,6 +182,7 @@
 
         .translate-button {
             background: linear-gradient(to right, var(--secondary-color), #00b894);
+            margin-bottom: 0.4rem;
         }
 
         .translate-button:hover {
@@ -197,6 +208,149 @@
             margin-bottom: 1.5rem;
             color: var(--accent-blue);
             font-weight: 500;
+        }
+
+        .card-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .card-modal-content {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 380px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.4s ease forwards;
+        }
+
+        .card-display {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 180px;
+        }
+
+        .card-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite linear;
+        }
+
+        .card-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+
+        .card-number {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            color: var(--accent-green);
+            text-shadow: 0 0 10px rgba(85, 239, 196, 0.3);
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .card-chip {
+            width: 40px;
+            height: 28px;
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            border-radius: 5px;
+            margin: 0.5rem 0;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .card-chip::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .bank-name {
+            font-weight: 700;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-top: 1.5rem;
+        }
+
+        .close-card-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-card-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .close-card-button svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--light-text);
         }
 
         .balance-item {
@@ -234,6 +388,9 @@
 
         .balance-value {
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            position: relative;
         }
 
         .error-message {
@@ -309,6 +466,60 @@
             color: var(--accent-green);
         }
 
+        .warning-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            margin-left: 5px;
+            background-color: rgba(255, 118, 117, 0.2);
+            color: var(--accent-red);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .warning-icon svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .warning-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--darker-bg);
+            color: var(--accent-red);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 10;
+            border: 1px solid rgba(255, 118, 117, 0.3);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .warning-icon:hover .warning-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -340,6 +551,39 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-10%, -10%); }
+            100% { transform: rotate(30deg) translate(10%, 10%); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulseWarning {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
         }
 
         .bg-animation {
@@ -381,18 +625,6 @@
             top: 30%;
             right: -50px;
             animation-delay: 6s;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            50% {
-                transform: translate(20px, 20px) rotate(180deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg);
-            }
         }
     </style>
 </head>
@@ -452,12 +684,11 @@
                  <span class="balance-value" id="debtValue">0</span>
              </div>
              
-             <button class="translate-button" onclick="window.open('https://t.me/naebank1_bot/perevod', '_blank')">
+             <button class="action-button" id="actionButton" onclick="showCardModal()">
                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M12 19L19 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                     <path d="M5 19L12 12L5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                     <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                  </svg>
-                 Перевести
+                 Действие
              </button>
              
              <button class="logout-button" onclick="logout()">
@@ -468,13 +699,41 @@
                  </svg>
                  Выход
              </button>
-             
-             <button class="tapalka-button" onclick="openTapalka()">
-                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                 </svg>
-                 Тапалка (бета)
-             </button> 
+         </div>
+
+         <div class="card-modal" id="cardModal">
+             <div class="card-modal-content">
+                 <button class="close-card-button" onclick="hideCardModal()">
+                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                     </svg>
+                 </button>
+                 <div class="card-display">
+                     <div class="card-label">НОМЕР КАРТЫ</div>
+                     <div class="card-number" id="modalCardValue">••••</div>
+                     <div class="card-chip"></div>
+                     <div class="card-footer">
+                         <span>ДЕБЕТОВАЯ КАРТА</span>
+                         <span class="bank-name">НАЕБАНк</span>
+                     </div>
+                 </div>
+                 <div class="modal-buttons">
+                     <button class="translate-button" onclick="window.open('https://t.me/naebank1_bot/perevod', '_blank')">
+                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <path d="M12 19L19 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                             <path d="M5 19L12 12L5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                         </svg>
+                         Перевести
+                     </button>
+                     
+                     <button class="tapalka-button" onclick="openTapalka()">
+                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                         </svg>
+                         Тапалка (бета)
+                     </button>
+                 </div>
+             </div>
          </div>
 
          <div id="translateModal" class="modal">
@@ -492,6 +751,41 @@
      </footer>
 
      <script>
+         function generateCardNumber() {
+             return Math.floor(1000 + Math.random() * 9000).toString();
+         }
+         
+         function generatePersistentCardNumber(username) {
+             let hash = 0;
+             for (let i = 0; i < username.length; i++) {
+                 hash = username.charCodeAt(i) + ((hash << 5) - hash);
+             }
+             return Math.abs(hash % 9000) + 1000;
+         }
+
+         function showCardModal() {
+             const modal = document.getElementById('cardModal');
+             modal.style.display = 'flex';
+             setTimeout(() => {
+                 modal.querySelector('.card-modal-content').style.transform = 'translateY(0)';
+                 modal.querySelector('.card-modal-content').style.opacity = '1';
+             }, 10);
+         }
+
+         function hideCardModal() {
+             const modal = document.getElementById('cardModal');
+             const content = modal.querySelector('.card-modal-content');
+             
+             content.style.animation = 'none';
+             void content.offsetWidth;
+             content.style.animation = 'slideDown 0.3s ease forwards';
+             
+             setTimeout(() => {
+                 modal.style.display = 'none';
+                 content.style.animation = '';
+             }, 300);
+         }
+
          const savedUsername = localStorage.getItem('username');
          const savedPassword = localStorage.getItem('password');
 
@@ -517,11 +811,11 @@
              document.getElementById('errorMessage').style.display = 'none';
 
              if (username === 'ladidon' && password === '23975bq12') {
-                 showBalance('256', '0', '0', '64 Алм', 'ladidon');
+                 showBalance('256', '0', '15', '64 Алм', 'ladidon');
                  return;
 
              } else if (username === 'alihansao2' && password === '1909') {
-                 showBalance('0', '0', '0', '80 Алм', 'Alihansao2');
+                 showBalance('0', '0', '88', '80 Алм', 'Alihansao2');
                  return;
 
              } else if (username === 'nevelionium' && password === '532') {
@@ -606,6 +900,15 @@
              document.getElementById('formContainer').style.display = 'none';
              document.getElementById('userInfo').style.display = 'block';
 
+             const cardNumber = generatePersistentCardNumber(username);
+             document.getElementById('modalCardValue').textContent = cardNumber;
+
+             const investElement = document.getElementById('invest');
+             if (investElement) {
+                 const warningIcons = investElement.querySelectorAll('.warning-icon');
+                 warningIcons.forEach(icon => icon.remove());
+             }
+
              if (balance) {
                  document.getElementById('diamValue').textContent = balance;
                  document.getElementById('diam').style.display = 'flex';
@@ -630,6 +933,19 @@
              if (invest) {
                  document.getElementById('investValue').textContent = invest;
                  document.getElementById('invest').style.display = 'flex';
+                 
+                 if (username.toLowerCase() === 'vanskop') {
+                     const warningIcon = document.createElement('div');
+                     warningIcon.className = 'warning-icon';
+                     warningIcon.innerHTML = `
+                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <path d="M12 9V11M12 15H12.01M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" 
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                         </svg>
+                         <div class="warning-tooltip">Приносим извинения, ставка провалилась</div>
+                     `;
+                     document.getElementById('investValue').appendChild(warningIcon);
+                 }
              } else {
                  document.getElementById('invest').style.display = 'none';
              }
