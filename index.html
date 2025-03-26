@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HoWoSy</title>
+    <style>
+        html, body {
+            touch-action: manipulation;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        
+        body {
+            background-color: #0a0120;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        body.modal-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        .container {
+            width: 300px;
+            margin: 200px auto;
+            padding: 25px;
+            background: linear-gradient(145deg, #230469, #1a0252);
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            margin-right: auto; /* Перемещаем логотип влево */
+        }
+        .naepayico {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+        }
+        .naepay {
+            font-size: 26px;
+            color: white;
+            margin-left: 10px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+        }
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto; /* Перемещаем профиль вправо */
+        }
+        .profile-pic {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, #6a00ff, #a100f2);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(106, 0, 255, 0.7);
+        }
+        .username {
+            font-size: 15px;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+        .card-info {
+            background: rgba(35, 4, 105, 0.7);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            color: white;
+            position: relative;
+            border: 1px solid rgba(106, 0, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .card-info h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .card-info .card-number {
+            font-size: 14px;
+            color: #bbbbbb;
+            margin-top: 8px;
+            letter-spacing: 0.3px;
+        }
+        .balance {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 16px;
+            color: #FFEB3B;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(255, 235, 59, 0.3);
+        }
+        .rectangle {
+            width: 70%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #6a00ff, transparent);
+            margin: -10px auto 20px;
+            border-radius: 3px;
+            opacity: 0.7;
+        }
+        input {
+            width: 90%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        input[type="text"] {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: 1px solid rgba(106, 0, 255, 0.3);
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #6a00ff;
+            box-shadow: 0 0 10px rgba(106, 0, 255, 0.3);
+        }
+        input::placeholder {
+            color: #aaaaaa;
+        }
+        .transfer-btn {
+            background: linear-gradient(45deg, #6a00ff, #8e2de2);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 15px auto;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 0, 255, 0.3);
+        }
+        .transfer-btn:hover {
+            background: linear-gradient(45deg, #8e2de2, #6a00ff);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(106, 0, 255, 0.4);
+        }
+        .cancel-btn {
+            background-color: transparent;
+            color: #999;
+            border: none;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        .cancel-btn:hover {
+            color: #ccc;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: linear-gradient(145deg, #1a0252, #0d0130);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            border: 1px solid rgba(106, 0, 255, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            animation: modalAppear 0.4s ease-out;
+        }
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .modal-content h3 {
+            font-size: 22px;
+            margin: 0 0 15px;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .modal-content p {
+            font-size: 16px;
+            color: #d0d0d0;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        .close-modal {
+            background: linear-gradient(45deg, #6a00ff, #8e2de2);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 0, 255, 0.3);
+            width: 100%;
+            max-width: 200px;
+        }
+        .close-modal:hover {
+            background: linear-gradient(45deg, #8e2de2, #6a00ff);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(106, 0, 255, 0.4);
+        }
+    </style>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('userInfo');
+            if (userData) {
+                try {
+                    const userInfo = JSON.parse(userData);
+                    if (userInfo.username) {
+                        document.querySelector('.username').textContent = userInfo.username;
+                    }
+                } catch (e) {
+                    console.error('Ошибка при чтении userInfo:', e);
+                }
+            }
+
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const modal = document.getElementById('unavailableModal');
+                document.body.classList.add('modal-open');
+                modal.style.display = 'flex';
+                
+                modal.addEventListener('click', function(event) {
+                    if (event.target === modal) {
+                        document.body.classList.remove('modal-open');
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+
+            document.querySelector('.close-modal').addEventListener('click', function() {
+                document.body.classList.remove('modal-open');
+                document.getElementById('unavailableModal').style.display = 'none';
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-section">
+                <img src="https://cdn-icons-png.flaticon.com/512/12201/12201294.png" class="naepayico">
+                <div class="naepay">NaePay</div>
+            </div>
+            <div class="profile-section">
+                <div class="profile-pic"></div>
+                <div class="username">Username</div>
+            </div>
+        </div>
+        <div class="card-info">
+            <div class="balance">Баланс: 100</div>
+            <h2>Алмазы</h2>
+            <div class="card-number">Номер Карты: 0000...</div>
+        </div>
+        <div class="rectangle"></div>
+        <form>
+            <input type="text" placeholder="Кому?">
+            <input type="text" placeholder="Сколько?">
+            <button type="submit" class="transfer-btn">Перевести</button>
+            <button type="button" class="cancel-btn" onclick="goBack()">Отменить</button>
+        </form>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="unavailableModal">
+        <div class="modal-content">
+            <h3>Временно недоступно</h3>
+            <p>Функция перевода временно недоступна. Мы работаем над устранением проблемы. Пожалуйста, попробуйте позже.</p>
+            <button class="close-modal">Понятно</button>
+        </div>
+    </div>
+</body>
+</html>
